@@ -19,3 +19,23 @@ export function parseValtoInt(val: unknown): number {
 
     throw new Error(`Cannot parse value of type ${typeof val} to an integer.`);
 }
+
+export function parseValtoString(val: unknown): string {
+    if (typeof val === 'string') {
+        return val;
+    }
+    if (typeof val === 'number') {
+        return val.toString();
+    }
+    if (typeof val === 'boolean') {
+        return val ? 'true' : 'false';
+    }
+    if (val === null || val === undefined) {
+        return '';
+    }
+    if (Array.isArray(val)) {
+        return val.join(', ');
+    }
+
+    throw new Error(`Cannot parse value of type ${typeof val} to a string.`);
+}
